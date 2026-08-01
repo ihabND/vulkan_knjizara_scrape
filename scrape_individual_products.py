@@ -32,16 +32,21 @@ for link in individual_product_links:
         print(f"Page fetch failed: {e}")
         continue
 
-    content = BeautifulSoup(individual_page.text, "html.parser")
-    data = content.find_all("script", {"type" : "application/ld+json"})[1]
-    json_data = json.loads(data.string)
+    try:
+        content = BeautifulSoup(individual_page.text, "html.parser")
+        data = content.find_all("script", {"type" : "application/ld+json"})[1]
+        json_data = json.loads(data.string)
 
-    formatted = parse_product(json_data, counter)
-    all_products.append(formatted)
+        formatted = parse_product(json_data, counter)
+        all_products.append(formatted)
 
-    print("SCRAPING...", counter)
-    counter += 1
+        print("SCRAPING...", counter)
+        counter += 1
+    except Exception as e:
+        print(f"Failed parsing: {e}")
 
-    with open("products_db.json", "w", encoding="utf-8") as file:
-        json.dump(all_products, file, indent=4)
-
+    try:
+        with open("products_db.json", "w", encoding="utf-8") as file:
+            json.dump(all_products, file, indent=4)
+    except Exception as e:
+        print(f"Failed writing to file: {e}")
