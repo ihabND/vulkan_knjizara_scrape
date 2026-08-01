@@ -1,0 +1,81 @@
+SCRAPING... 265 https://www.knjizare-vulkan.rs/proizvodi/page-265
+SCRAPING... 266 https://www.knjizare-vulkan.rs/proizvodi/page-266
+SCRAPING... 267 https://www.knjizare-vulkan.rs/proizvodi/page-267
+wrote article_links_8.txt (1000 links)
+SCRAPING... 268 https://www.knjizare-vulkan.rs/proizvodi/page-268
+SCRAPING... 269 https://www.knjizare-vulkan.rs/proizvodi/page-269
+SCRAPING... 270 https://www.knjizare-vulkan.rs/proizvodi/page-270
+SCRAPING... 271 https://www.knjizare-vulkan.rs/proizvodi/page-271
+SCRAPING... 272 https://www.knjizare-vulkan.rs/proizvodi/page-272
+SCRAPING... 273 https://www.knjizare-vulkan.rs/proizvodi/page-273
+SCRAPING... 274 https://www.knjizare-vulkan.rs/proizvodi/page-274
+SCRAPING... 275 https://www.knjizare-vulkan.rs/proizvodi/page-275
+SCRAPING... 276 https://www.knjizare-vulkan.rs/proizvodi/page-276
+SCRAPING... 277 https://www.knjizare-vulkan.rs/proizvodi/page-277
+SCRAPING... 278 https://www.knjizare-vulkan.rs/proizvodi/page-278
+SCRAPING... 279 https://www.knjizare-vulkan.rs/proizvodi/page-279
+SCRAPING... 280 https://www.knjizare-vulkan.rs/proizvodi/page-280
+SCRAPING... 281 https://www.knjizare-vulkan.rs/proizvodi/page-281
+SCRAPING... 282 https://www.knjizare-vulkan.rs/proizvodi/page-282
+Traceback (most recent call last):
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/urllib3/response.py", line 905, in _error_catcher
+    yield
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/urllib3/response.py", line 1434, in read_chunked
+    chunk = self._handle_chunk(amt)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/urllib3/response.py", line 1373, in _handle_chunk
+    returned_chunk = self._fp._safe_read(self.chunk_left)  # type: ignore[union-attr]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/client.py", line 646, in _safe_read
+    data = self.fp.read(cursize)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 707, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/ssl.py", line 1252, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/ssl.py", line 1104, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/requests/models.py", line 937, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/urllib3/response.py", line 1260, in stream
+    yield from self.read_chunked(amt, decode_content=decode_content)
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/urllib3/response.py", line 1407, in read_chunked
+    with self._error_catcher():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/urllib3/response.py", line 910, in _error_catcher
+    raise ReadTimeoutError(self._pool, None, "Read timed out.") from e  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.knjizare-vulkan.rs', port=443): Read timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ihab/D_DISK/vulkan_scrape/main.py", line 30, in <module>
+    response = requests.get(url, headers=user_agent, timeout=30)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/requests/api.py", line 87, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/requests/sessions.py", line 827, in send
+    r.content
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/requests/models.py", line 1042, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ihab/D_DISK/vulkan_scrape/.venv/lib/python3.12/site-packages/requests/models.py", line 943, in generate
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.knjizare-vulkan.rs', port=443): Read timed out.
