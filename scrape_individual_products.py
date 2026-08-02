@@ -21,7 +21,6 @@ def parse_product(product, counter):
     return data
 
 def dump_chunk(products, start_id):
-    """Write one batch to its own JSON file, named by the local_id range it holds."""
     end_id = start_id + len(products) - 1
     path = f"data/json_db/products_db_{start_id}_{end_id}.json"
     try:
@@ -47,8 +46,6 @@ user_agent = {
 
 FIELD_NAMES = ["local_id", "online_id", "name", "sku", "isbn", "image", "description", "url", "price"]
 
-# Resume from whatever is already in the CSV: continue the local_id sequence and
-# skip links that were scraped in an earlier run.
 counter = 1
 done_links = set()
 if os.path.exists("data/all_products_db.csv"):
@@ -97,8 +94,6 @@ with open("data/all_products_db.csv", "a", newline="", encoding="utf-8") as csv_
             csv_file.flush()
             print("Written to CSV", formatted["local_id"])
         except Exception as e:
-            # The CSV is what resume reads, so drop anything that didn't land
-            # there rather than leaving it only in the JSON chunk.
             print(f"Couldn't write to csv {e}")
             all_products.pop()
             counter -= 1
@@ -109,6 +104,5 @@ with open("data/all_products_db.csv", "a", newline="", encoding="utf-8") as csv_
                 chunk_start = counter
                 all_products = []
 
-# Whatever is left over after the last full chunk.
 if all_products:
     dump_chunk(all_products, chunk_start)
