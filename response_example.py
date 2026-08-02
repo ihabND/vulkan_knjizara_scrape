@@ -42,5 +42,10 @@ data = {}
 data["name"] = product['name']
 data["sku"] = product['sku']
 data["isbn"] = product['isbn']
+data["image"] = product['image']
 data["price"] = product['offers']['price']
-print(data)
+
+for key, value in data.items():
+    print(f"{key} : {value}")
+
+
